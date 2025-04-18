@@ -16,8 +16,8 @@ export default function SearchBar({ onSearch }) {
   }
 
   return (
-    <header>
-      <form onSubmit={handleSubmit}>
+    <header className={css.header}>
+      <form onSubmit={handleSubmit} className={css.form}>
         <div>
           <input
             type="text"
@@ -25,6 +25,7 @@ export default function SearchBar({ onSearch }) {
             autoFocus
             placeholder="Search images and photos"
             name="topic"
+            className={css.input}
           />
         </div>
         <button type="submit">Search</button>
