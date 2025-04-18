@@ -1,0 +1,23 @@
+header {
+  display: flex;
+  justify-content: center;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  background-color: #6d9865;
+  margin-bottom: 8px;
+}
+
+form {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
+
+input {
+  height: 36px;
+  width: 200px;
+  padding: 2px;
+  padding-left: 8px;
+  border-radius: 8px;
+  border-width: 0;
+}

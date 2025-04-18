@@ -1,0 +1,33 @@
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Modal {
+  position: relative;
+  padding-bottom: 12px;
+  max-width: 80%;
+  background: #b3e3ab;
+}
+
+.ModalImgContainer {
+  position: relative;
+}
+
+.ImgModal {
+  max-width: 100%;
+  max-height: 400px;
+}
+
+.author {
+  text-align: right;
+  margin-right: 12px;
+  margin-top: 12px;
+}

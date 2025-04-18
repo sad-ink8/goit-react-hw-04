@@ -1,0 +1,19 @@
+.ImageGallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.ImageGallery > li {
+  display: block;
+  height: 360px;
+}
+
+.GalleryContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}

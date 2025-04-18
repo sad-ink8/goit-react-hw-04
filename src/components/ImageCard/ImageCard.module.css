@@ -1,0 +1,12 @@
+.ImgCard {
+  display: block;
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+
+  transition: all 0.2s ease-in-out;
+}
+
+.ImgCard:hover {
+  filter: brightness(120%);
+}
