@@ -49,10 +49,13 @@ function App() {
       );
       if (response.data.results.length === 0) {
         alert("No photos for this topic");
+        setImages([]);
+        setTotalImages(0);
+        setVisible(0);
         return;
       }
 
-      setVisible((images) => images + response.data.results.length);
+      setVisible((prevVisible) => prevVisible + response.data.results.length);
       setImages((images) => [...images, ...response.data.results]);
 
       setQuery(search);
@@ -62,6 +65,8 @@ function App() {
       setError(false);
     } catch (error) {
       setError(true);
+      setTotalImages(0);
+      setVisible(0);
     } finally {
       setLoading(false);
     }
