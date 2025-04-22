@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 import SearchBar from "../components/SearchBar/SearchBar.jsx";
 import ImageGallery from "../components/ImageGallery/ImageGallery";
@@ -48,7 +49,7 @@ function App() {
         }
       );
       if (response.data.results.length === 0) {
-        alert("No photos for this topic");
+        toast.error("No photos for this topic");
         setImages([]);
         setTotalImages(0);
         setVisible(0);
@@ -101,6 +102,7 @@ function App() {
 
   return (
     <>
+      <Toaster position="top-right" />
       <SearchBar onSearch={handleSearch} />
       {error && <ErrorMessage />}
       <ImageGallery images={images} onCardClick={openModal} />

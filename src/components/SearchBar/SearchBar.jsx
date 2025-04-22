@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import css from "./SearchBar.module.css";
 
 export default function SearchBar({ onSearch }) {
@@ -7,7 +8,9 @@ export default function SearchBar({ onSearch }) {
     const topic = form.elements.topic.value;
 
     if (form.elements.topic.value.trim() === "") {
-      alert("Please enter search term!");
+      toast("Please enter search term!", {
+        icon: "🔍",
+      });
       return;
     }
 
