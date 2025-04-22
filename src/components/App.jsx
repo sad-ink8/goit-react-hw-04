@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
-import SearchBar from "../components/SearchBar/SearchBar.jsx";
-import ImageGallery from "../components/ImageGallery/ImageGallery";
+import SearchBar from "./SearchBar/SearchBar.jsx";
+import ImageGallery from "./ImageGallery/ImageGallery.jsx";
 
-import ImageModal from "../components/ImageModal/ImageModal";
+import ImageModal from "./ImageModal/ImageModal.jsx";
 
-import Loader from "../components/Loader/Loader.jsx";
-import ErrorMessage from "../components/ErrorMessage/ErrorMessage";
-import LoadMoreBtn from "../components/LoadMoreBtn/LoadMoreBtn";
+import Loader from "./Loader/Loader.jsx";
+import ErrorMessage from "./ErrorMessage/ErrorMessage.jsx";
+import LoadMoreBtn from "./LoadMoreBtn/LoadMoreBtn.jsx";
 
 ////
 import React from "react";
@@ -28,11 +28,13 @@ function App() {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalImage, setModalImage] = useState(false);
 
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
   const [totalImages, setTotalImages] = useState(0);
   const [visible, setVisible] = useState(0);
 
   async function fetchImages(search, pageNum) {
+    if (loading) return;
+
     try {
       setLoading(true);
 
@@ -56,10 +58,8 @@ function App() {
         return;
       }
 
+      setImages((prevImages) => [...prevImages, ...response.data.results]);
       setVisible((prevVisible) => prevVisible + response.data.results.length);
-      setImages((images) => [...images, ...response.data.results]);
-
-      setQuery(search);
 
       setTotalImages(response.data.total);
 
@@ -74,17 +74,20 @@ function App() {
   }
 
   async function handleSearch(topic) {
-    setImages([]);
-    setPage(1);
-    setVisible(0);
-    fetchImages(topic, 1);
+    if (topic !== query) {
+      setImages([]);
+      setPage(1);
+      setVisible(0);
+      setQuery(topic);
+      fetchImages(topic, 1);
+    }
   }
 
   ////PAGINATION
-  const handleOnLoadMore = async () => {
+  const handleOnLoadMore = () => {
+    if (loading || visible >= totalImages) return;
     const nextPage = page + 1;
     setPage(nextPage);
-    await fetchImages(query, nextPage);
   };
   ///
 
@@ -99,6 +102,12 @@ function App() {
     setModalImage(false);
   }
   ///
+
+  useEffect(() => {
+    if (query && page > 0) {
+      fetchImages(query, page);
+    }
+  }, [query, page]);
 
   return (
     <>
