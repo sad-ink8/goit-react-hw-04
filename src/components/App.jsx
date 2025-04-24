@@ -78,8 +78,8 @@ function App() {
       setImages([]);
       setPage(1);
       setVisible(0);
+      setTotalImages(0);
       setQuery(topic);
-      fetchImages(topic, 1);
     }
   }
 
